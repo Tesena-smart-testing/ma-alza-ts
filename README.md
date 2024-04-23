@@ -9,9 +9,8 @@
 ## Installation
 
 - clone repo using `git clone git@github.com:Tesena-smart-testing/templates_for_MA_training.git`
-- if you cannot find the `alza-ts` folder, then switch git branch to the `radekB/dev2`. This means, that this code was not yet merged into the `main` branch
-- switch to the `<project>/alza-ts` folder and run `npm i`
-- check `wdio.confi.ts` file and its `capabilities` prop. Create AVD emulation in the Android Studio accordingly, so this setup would work. Otherwise, adjust setup values to your emulated mobile device.
+- run `npm i`
+- check `wdio.conf.ts` file and its `capabilities` prop. Create AVD emulation in the Android Studio accordingly, so this setup would work. Otherwise, adjust setup values to your emulated mobile device.
 
 ## How to run tests
 
@@ -23,7 +22,7 @@
 - run `npm init wdio@latest ./path/to/new/project` or `npm init wdio@latest .` if you are already in your selected project folder
 - when prompted by CLI wizard, select needed options. Do not forget to select Typescript compiler and appium installation
 - wait until project is created
-- see [GUIDE](https://webdriver.io/docs/gettingstarted#initiate-a-webdriverio-setup)
+- see detailed [GUIDE](https://webdriver.io/docs/gettingstarted#initiate-a-webdriverio-setup)
 
 ## If you are using ESET Antivirus
 
