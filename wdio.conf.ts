@@ -62,7 +62,7 @@ export const config: Options.Testrunner = {
     {
       // capabilities for local Appium web tests on an Android Emulator
       platformName: "Android",
-      "appium:platformVersion": "13.0",
+      "appium:platformVersion": "12.0",
       "appium:deviceName": "Pixel 6 API 33",
       "appium:automationName": "UIAutomator2",
       "appium:appPackage": "cz.alza.eshop",
