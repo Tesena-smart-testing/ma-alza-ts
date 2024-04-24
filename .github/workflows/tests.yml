@@ -31,9 +31,7 @@ jobs:
     - name: run tests
       uses: reactivecircus/android-emulator-runner@v2
       with:
-        api-level: 32 
+        api-level: 33
         arch: x86_64
         target: google_apis
-        profile: Pixel 6
-        avd-name: Pixel 6 API 33
         script: npx wdio run ./wdio.conf.ts 
