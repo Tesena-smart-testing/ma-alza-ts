@@ -17,6 +17,12 @@
 - start Android Studio and correct mobile phone emulation
 - run `npx wdio run ./wdio.conf.ts`
 
+## CI/CD Github pipeline
+
+- implementation is based on standard node.js setup
+- AVD is created using this [excellent github action](https://github.com/marketplace/actions/android-emulator-runner)
+  - read the documentation of the action repo
+
 ## How to create completely new project
 
 - run `npm init wdio@latest ./path/to/new/project` or `npm init wdio@latest .` if you are already in your selected project folder
