@@ -23,6 +23,13 @@
 - AVD is created using this [excellent github action](https://github.com/marketplace/actions/android-emulator-runner)
   - read the documentation of the action repo
 
+### Test artefacts storage
+
+- tests are creating HTML test reports including video recordings of each test in `reports/html-reports`
+- configuration is in `wdio.conf.ts`
+- this solution uses [video-reporter](https://webdriver.io/docs/wdio-video-reporter) and [HTML reporter](https://webdriver.io/docs/wdio-html-nice-reporter)
+- if tests are run on CI/CD pipeline, then they are stored using `actions/upload-artifact`. You can access the report from the details of the given job run - e.g. [HERE](https://github.com/Tesena-smart-testing/ma-alza-ts/actions/runs/8827929608), in the `Artifacts` section
+
 ## How to create completely new project
 
 - run `npm init wdio@latest ./path/to/new/project` or `npm init wdio@latest .` if you are already in your selected project folder
