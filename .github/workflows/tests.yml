@@ -60,4 +60,13 @@ jobs:
           arch: x86_64
           target: google_apis
           script: npx wdio run ./wdio.conf.ts
+      
+      - name: store test artifacts
+        uses: upload-artifact@v4
+        with:
+          name: HTML test report
+          path: reports/html-reports
+          if-no-files-found: warn
+          retention-days: 30
+          overwrite: true
 
