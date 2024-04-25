@@ -1,5 +1,13 @@
 import { resolve } from "node:path";
 import type { Options } from "@wdio/types";
+import {
+  ReportGenerator,
+  HtmlReporter,
+  ReportAggregator,
+} from "wdio-html-nice-reporter";
+
+let reportAggregator: ReportAggregator;
+
 export const config: Options.Testrunner = {
   //
   // ====================
@@ -151,7 +159,21 @@ export const config: Options.Testrunner = {
   // Test reporter for stdout.
   // The only one supported by default is 'dot'
   // see also: https://webdriver.io/docs/dot-reporter
-  reporters: ["spec"],
+  reporters: [
+    "spec",
+    [
+      "html-nice",
+      {
+        outputDir: "./reports/html-reports/",
+        filename: "report.html",
+        reportTitle: "Test Run Report",
+        linkScreenshots: true,
+        showInBrowser: false,
+        collapseTests: false,
+        useOnAfterCommandForScreenshot: true,
+      },
+    ],
+  ],
 
   // Options to be passed to Mocha.
   // See the full list at http://mochajs.org/
@@ -173,8 +195,15 @@ export const config: Options.Testrunner = {
    * @param {object} config wdio configuration object
    * @param {Array.<Object>} capabilities list of capabilities details
    */
-  // onPrepare: function (config, capabilities) {
-  // },
+  onPrepare: function (config, capabilities) {
+    reportAggregator = new ReportAggregator({
+      outputDir: "./reports/html-reports",
+      filename: "main-report.html",
+      reportTitle: "Test Run Aggregated Report",
+      browserName: "Android 13",
+      collapseTests: true,
+    });
+  },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
    * for that worker as well as modify runtime environments in an async fashion.
@@ -297,8 +326,11 @@ export const config: Options.Testrunner = {
    * @param {Array.<Object>} capabilities list of capabilities details
    * @param {<Object>} results object containing test results
    */
-  // onComplete: function(exitCode, config, capabilities, results) {
-  // },
+  onComplete: function (exitCode, config, capabilities, results) {
+    (async () => {
+      await reportAggregator.createReport();
+    })();
+  },
   /**
    * Gets executed when a refresh happens.
    * @param {string} oldSessionId session ID of the old session
