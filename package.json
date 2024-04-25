@@ -11,6 +11,8 @@
     "appium-uiautomator2-driver": "^3.1.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.4.5",
+    "wdio-html-nice-reporter": "^8.1.6",
+    "wdio-video-reporter": "^5.2.0",
     "wdio-wait-for": "^3.0.11"
   }
 }
