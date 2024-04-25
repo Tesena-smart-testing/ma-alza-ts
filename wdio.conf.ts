@@ -6,6 +6,8 @@ import {
   ReportAggregator,
 } from "wdio-html-nice-reporter";
 
+const video = import("wdio-video-reporter");
+
 let reportAggregator: ReportAggregator;
 
 export const config: Options.Testrunner = {
@@ -87,7 +89,7 @@ export const config: Options.Testrunner = {
   // Define all options that are relevant for the WebdriverIO instance here
   //
   // Level of logging verbosity: trace | debug | info | warn | error | silent
-  logLevel: "debug",
+  logLevel: "error",
   //
   // Set specific log levels per logger
   // loggers:
@@ -170,7 +172,16 @@ export const config: Options.Testrunner = {
         linkScreenshots: true,
         showInBrowser: false,
         collapseTests: false,
-        useOnAfterCommandForScreenshot: true,
+        useOnAfterCommandForScreenshot: false,
+      },
+    ],
+    [
+      "video",
+      {
+        saveAllVideos: true,
+        videoSlowdownMultiplier: 3,
+        // put video screenshots into html-reporter folder
+        outputDir: "./reports/html-reports/screenshots"
       },
     ],
   ],
@@ -203,6 +214,7 @@ export const config: Options.Testrunner = {
       browserName: "Android 13",
       collapseTests: true,
     });
+    reportAggregator.clean();
   },
   /**
    * Gets executed before a worker process is spawned and can be used to initialize specific service
