@@ -37,6 +37,27 @@
 - wait until project is created
 - see detailed [GUIDE](https://webdriver.io/docs/gettingstarted#initiate-a-webdriverio-setup)
 
+## How to run tests against real device
+
+- enable development mode on your phone
+- connect to the computer via USB
+- if you have Android Studio installed, then go to `C:\Users\<username>\AppData\Local\Sdk\platform-tools` and run `.\adb.exe devices`. You should see your device connected. If not, try to run `.\adb.exe usb` and on you mobile device confirm the connection and authorization.
+- If you have Android 14, then you can just run `npx wdio run ./wdio.adb.conf.ts`. Otherwise adjust `capabilities` in the wdio conf file.
+
+## How to create real devices farm using stf
+
+**WARNING**: Unfortunately, I am able to build an image and run the service, but detecting devices fails and I am at my wits end.
+
+- have Docker installed
+- if you are in the ROOT of this project, then run `docker build -t stf -f ./stf/Dockerfile ./stf` to build the image
+- then start the service using `docker run -it -p 7100:7100 -p 7110:7110 stf /bin/bash`
+- then open `http://127.0.0.1:7100` in your browser
+- login as `administrator` with password `administrator@fakedomain.com`
+
+### Documentation
+
+- see [HERE](https://github.com/DeviceFarmer/stf?tab=readme-ov-file#features)
+
 ## If you are using ESET Antivirus
 
 - be careful, latest update of ESET as of 23.04.2024 breaks nodejs and npm functionalities due to nodejs handling of the certificates. ESET newly implemented scanning of HTTPS protocol and blocks nodejs' network calls. Current workaround is to disable the https scanning or wait few days until this is fixed and rolled out from ESET. See [HERE](https://forum.eset.com/topic/40702-eset-ssl-protection-produces-an-invalid-certificate-chain-for-nodejs-apps/page/2/)
