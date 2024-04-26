@@ -41,8 +41,8 @@
 
 - have Docker installed
 - if you are in the ROOT of this project, then run `docker build -t stf -f ./stf/Dockerfile ./stf` to build the image
-- then start the service using `docker run -it -p 7100:7100 stf /bin/bash`
-- then open `http://localhost:7100` in your browser
+- then start the service using `docker run -it -p 7100:7100 -p 7110:7110 stf /bin/bash`
+- then open `http://127.0.0.1:7100` in your browser
 - login as `administrator` with password `administrator@fakedomain.com`
 
 ### Documentation
