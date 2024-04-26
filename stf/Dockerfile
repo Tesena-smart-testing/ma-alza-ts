@@ -19,8 +19,14 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Node.js
-RUN curl -fsSL https://deb.nodesource.com/setup_20.12.2 | bash -
-RUN apt-get update && apt-get install -y nodejs npm
+# installs NVM (Node Version Manager) and NODE with NPM
+ENV NODE_VERSION=18.20.2
+RUN curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+ENV NVM_DIR=/root/.nvm
+RUN . "$NVM_DIR/nvm.sh" && nvm install ${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm use v${NODE_VERSION}
+RUN . "$NVM_DIR/nvm.sh" && nvm alias default v${NODE_VERSION}
+ENV PATH="/root/.nvm/versions/node/v${NODE_VERSION}/bin/:${PATH}"
 
 # Install ADB
 RUN apt-get update && apt-get install -y android-tools-adb
@@ -39,7 +45,7 @@ WORKDIR /app
 RUN git clone https://github.com/DeviceFarmer/stf.git 
 
 WORKDIR /app/stf
-RUN npm install
+RUN npm install 
 
 # add script for entrypoint and create dir for data
 WORKDIR /app
