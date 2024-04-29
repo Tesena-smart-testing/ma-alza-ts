@@ -41,14 +41,7 @@ RUN npm install -g @devicefarmer/stf
 
 WORKDIR /app
 
-# Clone stf repo and install all other npm deps
-RUN git clone https://github.com/DeviceFarmer/stf.git 
-
-WORKDIR /app/stf
-RUN npm install 
-
 # add script for entrypoint and create dir for data
-WORKDIR /app
 COPY run.sh run.sh
 RUN chmod +x run.sh
 RUN mkdir rethinkdb_data
@@ -56,4 +49,4 @@ RUN mkdir rethinkdb_data
 WORKDIR /app
 
 # should start the server on http://localhost:7100
-ENTRYPOINT [ "./run.sh" ]
+ENTRYPOINT [ "/app/run.sh" ]
